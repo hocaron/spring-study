@@ -63,6 +63,10 @@ class MemberServiceTest {
         member2.setName("spring2");
         memberService.join(member2);
 
+        Member member3 = new Member();
+        member3.setName("spring3");
+        memberService.join(member3);
+
         List<Member> result = memoryMemberRepository.findAll();
         assertThat(result).isEqualTo(memberService.findMembers());
     }
