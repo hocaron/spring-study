@@ -12,4 +12,6 @@ public class controller {
         model.addAttribute("data", "Study now!");
         return "study";
     }
+
+
 }
