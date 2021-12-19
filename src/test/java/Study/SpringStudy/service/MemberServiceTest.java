@@ -34,6 +34,7 @@ class MemberServiceTest {
 
         // when
         Long savedId = memberService.join(member);
+        
 
         // then
         Member savedMember = memberService.findOne(savedId).get();

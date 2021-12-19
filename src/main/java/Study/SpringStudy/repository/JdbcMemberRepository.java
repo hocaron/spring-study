@@ -2,6 +2,7 @@ package Study.SpringStudy.repository;
 
 import Study.SpringStudy.domain.Member;
 import org.springframework.jdbc.datasource.DataSourceUtils;
+
 import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
@@ -38,8 +39,6 @@ public class JdbcMemberRepository implements MemberRepository {
             close(conn, pstmt, rs);
         }
     }
-
-
     @Override
     public Optional<Member> findById(Long id) {
         String sql = "select * from member where id = ?";
@@ -144,4 +143,3 @@ public class JdbcMemberRepository implements MemberRepository {
         DataSourceUtils.releaseConnection(conn, dataSource);
     }
 }
-
