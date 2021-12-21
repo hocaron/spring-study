@@ -3,10 +3,8 @@ package hocaron.basic;
 import hocaron.basic.member.Grade;
 import hocaron.basic.member.Member;
 import hocaron.basic.member.MemberService;
-import hocaron.basic.member.MemberServiceImpl;
 import hocaron.basic.order.Order;
 import hocaron.basic.order.OrderService;
-import hocaron.basic.order.OrderServiceImpl;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
