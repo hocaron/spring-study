@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-@MainDiscountPolicy
 public class OrderServiceImpl implements OrderService {
 
     private final MemberRepository memberRepository;
