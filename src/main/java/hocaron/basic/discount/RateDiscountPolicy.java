@@ -2,7 +2,9 @@ package hocaron.basic.discount;
 
 import hocaron.basic.member.Grade;
 import hocaron.basic.member.Member;
+import org.springframework.stereotype.Component;
 
+@Component
 public class RateDiscountPolicy implements DiscountPolicy{
     private int discountPercent = 10; // 1000원 할인
 
