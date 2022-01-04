@@ -1,13 +1,13 @@
-package hocaron.basic;
+package backend.spring;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class BasicApplication {
+public class Application {
 
 	public static void main(String[] args) {
-		SpringApplication.run(BasicApplication.class, args);
+		SpringApplication.run(Application.class, args);
 	}
 
 }

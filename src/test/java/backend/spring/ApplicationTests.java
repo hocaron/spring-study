@@ -1,10 +1,10 @@
-package hocaron.basic;
+package backend.spring;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class BasicApplicationTests {
+class ApplicationTests {
 
 	@Test
 	void contextLoads() {
