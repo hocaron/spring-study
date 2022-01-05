@@ -1,4 +1,4 @@
-package backend.spring.model;
+package backend.spring.entity;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -22,6 +22,7 @@ public class Member {
     @Enumerated(EnumType.STRING)
     private Authority authority;
 
+    @Builder
     public Member(String email, String password, Authority authority) {
         this.email = email;
         this.password = password;
