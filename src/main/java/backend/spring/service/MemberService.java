@@ -1,6 +1,6 @@
 package backend.spring.service;
 
-import backend.spring.dto.MemberResponseDto;
+import backend.spring.controller.dto.MemberResponseDto;
 import backend.spring.repository.MemberRepository;
 import backend.spring.util.SecurityUtil;
 import lombok.RequiredArgsConstructor;

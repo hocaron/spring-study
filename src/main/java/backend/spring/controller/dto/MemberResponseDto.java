@@ -1,9 +1,7 @@
-package backend.spring.dto;
+package backend.spring.controller.dto;
 
-import backend.spring.entity.Authority;
 import backend.spring.entity.Member;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 

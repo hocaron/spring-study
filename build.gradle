@@ -28,6 +28,11 @@ dependencies {
 	implementation "org.springframework.security:spring-security-jwt:1.1.1.RELEASE"
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 
+	// jwt 관련 의존성
+	implementation 'io.jsonwebtoken:jjwt-api:0.11.2'
+	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.2', 'io.jsonwebtoken:jjwt-jackson:0.11.2'
+
+
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'com.h2database:h2'
