@@ -14,7 +14,7 @@ public class RedisRepositoryTest {
 
     @Test
     void test() {
-        Person person = new Person("Ho", 20);
+        Person person = new Person("ho", 20);
 
         // 저장
         repo.save(person);
@@ -25,7 +25,5 @@ public class RedisRepositoryTest {
         // Person Entity 의 @RedisHash 에 정의되어 있는 keyspace (people) 에 속한 키의 갯수를 구함
         repo.count();
 
-        // 삭제
-        repo.delete(person);
     }
 }
