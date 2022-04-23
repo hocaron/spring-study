@@ -7,8 +7,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
-import java.util.Map;
 import javax.servlet.ReadListener;
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +18,10 @@ public class CachingRequestWrapper extends HttpServletRequestWrapper {
 
     private final Charset encoding;
     private byte[] rawData;
-    private Map<String, String[]> params = new HashMap<>();
+
+    /**
+     * TODO requestParam 로깅 안 되는 이슈 해결
+     */
 
     public CachingRequestWrapper(HttpServletRequest request) throws IOException {
         super(request);
