@@ -1,0 +1,30 @@
+type Member {
+    id: Int!
+    login_id: String!
+    password: String!
+    name: String
+    roles: [Role]
+}
+
+type Role {
+    id: Int!
+    member_id: Int!
+    role: String
+}
+
+input MemberParam {
+    loginId: String!
+    password: String!
+    name: String
+}
+
+# 루트 쿼리 (Root Query)
+type Query {
+    getMember(id: Int!) : Member!
+}
+
+# 루트 뮤테이션 (Root Mutation)
+type Mutation {
+    createMember(memberParam: MemberParam) : Member!
+    deleteMember(id: Int!) : Boolean!
+}
