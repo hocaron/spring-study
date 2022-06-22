@@ -42,6 +42,9 @@ bootJar {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'junit:junit:4.13.1'
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
 
     /* Rest Docs 관련 */
     asciidoctorExtensions 'org.springframework.restdocs:spring-restdocs-asciidoctor'
