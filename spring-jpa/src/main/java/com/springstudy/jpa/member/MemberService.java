@@ -6,6 +6,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.springstudy.jpa.organization.Organization;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -36,6 +38,14 @@ public class MemberService {
 
     @Transactional
     public Member saveAndFlushAndUpdate(String nickname) {
+        Member member = Member.of(nickname);
+        member = memberRepository.saveAndFlush(member);
+        member.setNickname("testNickname2");
+        return member;
+    }
+
+    @Transactional(readOnly = true)
+    public Member findByOrganization(Organization organization) {
         Member member = Member.of(nickname);
         member = memberRepository.saveAndFlush(member);
         member.setNickname("testNickname2");
