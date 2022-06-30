@@ -41,13 +41,11 @@ public class MemberController {
 
     @GetMapping("/find-by-entity/{organizationId}")
     public List<Member> findByOrganization(@PathVariable Long organizationId) {
-        System.out.println(organizationId);
         return memberService.findByOrganization(organizationId);
     }
 
     @GetMapping("/find-by-id/{organizationId}")
     public List<Member> findByOrganizationId(@PathVariable Long organizationId) {
-        System.out.println(organizationId);
         return memberService.findByOrganizationId(organizationId);
     }
 }
