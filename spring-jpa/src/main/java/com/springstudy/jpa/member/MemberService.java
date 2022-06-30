@@ -7,12 +7,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.springstudy.jpa.organization.Organization;
+import com.springstudy.jpa.organization.OrganizationRepository;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
 public class MemberService {
     private final MemberRepository memberRepository;
+    private final OrganizationRepository organizationRepository;
 
     public Member save(String nickname) {
         Member member1 = Member.of(nickname);
@@ -45,10 +47,16 @@ public class MemberService {
     }
 
     @Transactional(readOnly = true)
-    public Member findByOrganization(Organization organization) {
-        Member member = Member.of(nickname);
-        member = memberRepository.saveAndFlush(member);
-        member.setNickname("testNickname2");
+    public Member findByOrganization(Long organizationId) {
+        Organization organization =
+            organizationRepository.findById(organizationId).orElseThrow(RuntimeException::new);
+        Member member = memberRepository.findByOrganization(organization);
+        return member;
+    }
+
+    @Transactional(readOnly = true)
+    public Member findByOrganizationId(Long organizationId) {
+        Member member = memberRepository.findByOrganizationId(organizationId);
         return member;
     }
 }
