@@ -1,5 +1,7 @@
 package com.springstudy.jpa.member;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.springstudy.jpa.organization.Organization;
@@ -7,7 +9,7 @@ import com.springstudy.jpa.organization.Organization;
 public interface MemberRepository extends JpaRepository<Member, Long> {
     Member findByNickname(String nickname);
 
-    Member findByOrganization(Organization organization);
+    List<Member> findByOrganization(Organization organization);
 
-    Member findByOrganizationId(Long organizationId);
+    List<Member> findByOrganizationId(Long organizationId);
 }

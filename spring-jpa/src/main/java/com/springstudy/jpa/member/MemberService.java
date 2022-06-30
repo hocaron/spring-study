@@ -1,5 +1,7 @@
 package com.springstudy.jpa.member;
 
+import java.util.List;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -47,16 +49,16 @@ public class MemberService {
     }
 
     @Transactional(readOnly = true)
-    public Member findByOrganization(Long organizationId) {
+    public List<Member> findByOrganization(Long organizationId) {
         Organization organization =
             organizationRepository.findById(organizationId).orElseThrow(RuntimeException::new);
-        Member member = memberRepository.findByOrganization(organization);
-        return member;
+        List<Member> members = memberRepository.findByOrganization(organization);
+        return members;
     }
 
     @Transactional(readOnly = true)
-    public Member findByOrganizationId(Long organizationId) {
-        Member member = memberRepository.findByOrganizationId(organizationId);
-        return member;
+    public List<Member> findByOrganizationId(Long organizationId) {
+        List<Member> members = memberRepository.findByOrganizationId(organizationId);
+        return members;
     }
 }
