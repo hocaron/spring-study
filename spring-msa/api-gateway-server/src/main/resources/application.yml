@@ -7,11 +7,11 @@ spring:
     gateway:
       routes:
         - id: member-service
-          uri: http://localhost:8181
+          uri: http://localhost:8080
           predicates:
-            - Path=/order/**
+            - Path=/member/**
           filters:
-            - RewritePath=/order/(?<path>.*),/$\{path}
+            - RewritePath=/member/(?<path>.*),/$\{path}
 eureka:
   client:
     service-url:
