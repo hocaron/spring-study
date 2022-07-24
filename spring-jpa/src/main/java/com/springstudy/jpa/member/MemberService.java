@@ -36,7 +36,6 @@ public class MemberService {
     public Member saveAndUpdate(String nickname) {
         Member member = Member.of(nickname);
         member = memberRepository.save(member);
-        member.setNickname("testNickname2");
         return member;
     }
 
@@ -44,7 +43,6 @@ public class MemberService {
     public Member saveAndFlushAndUpdate(String nickname) {
         Member member = Member.of(nickname);
         member = memberRepository.saveAndFlush(member);
-        member.setNickname("testNickname2");
         return member;
     }
 
@@ -60,5 +58,13 @@ public class MemberService {
     public List<Member> findByOrganizationId(Long organizationId) {
         List<Member> members = memberRepository.findByOrganizationId(organizationId);
         return members;
+    }
+
+    @Transactional
+    public Member updateMemberNickname(Long memberId) {
+        Member member = memberRepository.findById(memberId).orElseThrow(RuntimeException::new);
+        String newNickname = "newNickname";
+        member.nickname(newNickname);
+        return member;
     }
 }
