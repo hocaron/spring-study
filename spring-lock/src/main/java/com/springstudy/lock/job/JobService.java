@@ -14,13 +14,19 @@ public class JobService {
 
     private final JobRepository jobRepository;
 
-    public Integer currentSalary(String name){
+    public Integer currentSalary(String name) {
         Job job = jobRepository.findByName(name);
         return job.getSalary();
     }
 
-    public Integer increaseSalary(String name, Integer salary){
+    public Integer increaseSalary(String name, Integer salary) {
         Job job = jobRepository.findByName(name);
+        job.increaseSalary(salary);
+        return job.getSalary();
+    }
+
+    public Integer increaseSalaryWithPessimisticLock(String name, Integer salary) {
+        Job job = jobRepository.findByNameWithPessimisticLock(name);
         job.increaseSalary(salary);
         return job.getSalary();
     }
