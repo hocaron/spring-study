@@ -11,8 +11,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {ConfigTest.Config.class})
-public class ConfigTest {
+@ContextConfiguration(classes = {ConfigurationTest.Config.class})
+public class ConfigurationTest {
 
 	@Autowired
 	SimpleBeanConsumer consumer;
