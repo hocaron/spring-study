@@ -3,10 +3,8 @@ package com.springstudy.tobyspring;
 import java.sql.SQLException;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
-public class TobySpringApplication {
+public class UserDaoTest {
 
 	public static void main(String[] args) throws SQLException, ClassNotFoundException {
 		SpringApplication.run(TobySpringApplication.class, args);
