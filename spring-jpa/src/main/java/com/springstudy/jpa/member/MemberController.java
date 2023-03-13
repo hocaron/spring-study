@@ -21,8 +21,8 @@ public class MemberController {
     private final MemberService memberService;
 
     @PostMapping("/save")
-    public Member save(@RequestParam(required = false) String param1, @RequestParam(required = false) String param2) {
-        return memberService.save("testNickname");
+    public void save(@RequestParam(required = false) String param1, @RequestParam(required = false) String param2) {
+        memberService.save("testNickname");
     }
 
     @PostMapping("/save-and-flush")
@@ -38,15 +38,5 @@ public class MemberController {
     @PostMapping("/save-and-flush-update")
     public Member saveAndFlushAndUpdate() {
         return memberService.saveAndFlushAndUpdate("testNickname");
-    }
-
-    @GetMapping("/find-by-entity/{organizationId}")
-    public List<Member> findByOrganization(@PathVariable Long organizationId) {
-        return memberService.findByOrganization(organizationId);
-    }
-
-    @GetMapping("/find-by-id/{organizationId}")
-    public List<Member> findByOrganizationId(@PathVariable Long organizationId) {
-        return memberService.findByOrganizationId(organizationId);
     }
 }

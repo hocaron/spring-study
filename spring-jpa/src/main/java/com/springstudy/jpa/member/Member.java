@@ -31,10 +31,6 @@ public class Member {
 
     private String nickname;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "organization_id")
-    private Organization organization;
-
     public static Member of(String nickname) {
         Member member = new Member();
         member.nickname = nickname;

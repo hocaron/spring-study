@@ -18,12 +18,16 @@ public class MemberService {
     private final MemberRepository memberRepository;
     private final OrganizationRepository organizationRepository;
 
-    public Member save(String nickname) {
+    public void save(String nickname) {
+
+        Organization organization = new Organization();
+        organization.setName("name");
+
         Member member1 = Member.of(nickname);
-        Member member2 = Member.of(nickname);
         memberRepository.save(member1);
-        memberRepository.save(member2);
-        return memberRepository.save(member1);
+        Member member2 = memberRepository.findById(1l).orElseThrow();
+        member2.nickname("test");
+        System.out.println(memberRepository.findByNickname("test").nickname());
     }
 
     @Transactional
@@ -44,20 +48,6 @@ public class MemberService {
         Member member = Member.of(nickname);
         member = memberRepository.saveAndFlush(member);
         return member;
-    }
-
-    @Transactional(readOnly = true)
-    public List<Member> findByOrganization(Long organizationId) {
-        Organization organization =
-            organizationRepository.findById(organizationId).orElseThrow(RuntimeException::new);
-        List<Member> members = memberRepository.findByOrganization(organization);
-        return members;
-    }
-
-    @Transactional(readOnly = true)
-    public List<Member> findByOrganizationId(Long organizationId) {
-        List<Member> members = memberRepository.findByOrganizationId(organizationId);
-        return members;
     }
 
     @Transactional

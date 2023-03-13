@@ -9,7 +9,4 @@ import com.springstudy.jpa.organization.Organization;
 public interface MemberRepository extends JpaRepository<Member, Long> {
     Member findByNickname(String nickname);
 
-    List<Member> findByOrganization(Organization organization);
-
-    List<Member> findByOrganizationId(Long organizationId);
 }

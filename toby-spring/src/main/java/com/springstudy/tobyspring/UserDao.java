@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Optional;
 
 public class UserDao {
 
@@ -35,16 +36,48 @@ public class UserDao {
 		ps.setString(1, id);
 
 		ResultSet rs = ps.executeQuery();
-		rs.next();
-		User user = new User();
-		user.setId(rs.getString("id"));
-		user.setId(rs.getString("name"));
-		user.setId(rs.getString("password"));
+		User user = null;
+
+		if (rs.next()) {
+			user = new User();
+			user.setId(rs.getString("id"));
+			user.setName(rs.getString("name"));
+			user.setPassword(rs.getString("password"));
+		}
 
 		rs.close();
 		ps.close();
 		c.close();
 
+		Optional.ofNullable(user).orElseThrow(IllegalAccessError::new);
+
 		return user;
+	}
+
+	public void deleteAll() throws SQLException, ClassNotFoundException {
+		this.c = connectionMaker.makeConnection();
+
+		PreparedStatement ps = c.prepareStatement("delete from users");
+
+		ps.executeUpdate();
+		ps.close();
+		c.close();
+	}
+
+	public int getCount() throws SQLException, ClassNotFoundException {
+		this.c = connectionMaker.makeConnection();
+
+		PreparedStatement ps = c.prepareStatement("select count(*) from users");
+
+		ps.executeQuery();
+		ResultSet rs = ps.executeQuery();
+		rs.next();
+		int count = rs.getInt(1);
+
+		rs.close();
+		ps.close();
+		c.close();
+
+		return count;
 	}
 }
