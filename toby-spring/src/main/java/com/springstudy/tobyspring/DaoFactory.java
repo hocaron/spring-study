@@ -11,10 +11,4 @@ public class DaoFactory {
 		return new SimpleConnectionMaker();
 	}
 
-	@Bean
-	public UserDao userDao() {
-		ConnectionMaker connectionMaker = makeConnection();
-		UserDao userDao = new UserDao(connectionMaker);
-		return userDao;
-	}
 }
