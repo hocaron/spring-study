@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.sql.SQLException;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -25,6 +26,7 @@ public class UserDaoTest {
 	}
 
 	@Test
+	@DisplayName("insert")
 	public void addAndGet() throws SQLException, ClassNotFoundException {
 
 		ApplicationContext applicationContext = new AnnotationConfigApplicationContext(DaoFactory.class);
