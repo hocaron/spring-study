@@ -7,12 +7,13 @@ import java.sql.SQLException;
 
 public class UserDaoGetCount extends UserDao {
 
-	private ConnectionMaker connectionMaker;
+	private final ConnectionMaker connectionMaker;
 
 	public UserDaoGetCount(ConnectionMaker connectionMaker) {
 		this.connectionMaker = connectionMaker;
 	}
 
+	@Override
 	protected PreparedStatement makeStatement(Connection c) throws SQLException {
 		PreparedStatement ps = c.prepareStatement("select count(*) from users");
 		return ps;
@@ -25,7 +26,7 @@ public class UserDaoGetCount extends UserDao {
 
 		try {
 			c = connectionMaker.makeConnection();
-			ps = c.prepareStatement("select count(*) from users");
+			ps = makeStatement(c);
 
 			rs = ps.executeQuery();
 			rs.next();

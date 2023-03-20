@@ -6,14 +6,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Optional;
 
-public class UserDaoGet {
+public class UserDaoGet extends UserDao {
 
-	private ConnectionMaker connectionMaker;
+	private final ConnectionMaker connectionMaker;
 
 	public UserDaoGet(ConnectionMaker connectionMaker) {
 		this.connectionMaker = connectionMaker;
 	}
 
+	@Override
 	protected PreparedStatement makeStatement(Connection c) throws SQLException {
 		PreparedStatement ps = c.prepareStatement("select * from users where id = ?");
 		return ps;

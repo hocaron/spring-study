@@ -6,12 +6,13 @@ import java.sql.SQLException;
 
 public class UserDaoDeleteAll extends UserDao {
 
-	private ConnectionMaker connectionMaker;
+	private final ConnectionMaker connectionMaker;
 
 	public UserDaoDeleteAll(ConnectionMaker connectionMaker) {
 		this.connectionMaker = connectionMaker;
 	}
 
+	@Override
 	protected PreparedStatement makeStatement(Connection c) throws SQLException {
 		PreparedStatement ps = c.prepareStatement("delete from users");
 		return ps;

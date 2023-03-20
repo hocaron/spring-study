@@ -10,5 +10,4 @@ public class DaoFactory {
 	public ConnectionMaker makeConnection() {
 		return new SimpleConnectionMaker();
 	}
-
 }
