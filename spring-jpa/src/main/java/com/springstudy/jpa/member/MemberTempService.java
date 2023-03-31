@@ -1,27 +1,26 @@
 package com.springstudy.jpa.member;
 
-import java.util.List;
-
+import com.springstudy.jpa.organization.Organization;
+import com.springstudy.jpa.organization.OrganizationRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.springstudy.jpa.organization.Organization;
-import com.springstudy.jpa.organization.OrganizationRepository;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class MemberService {
+public class MemberTempService {
     private final MemberRepository memberRepository;
     private final TempMemberRepository tempMemberRepository;
     private final OrganizationRepository organizationRepository;
-    private final MemberTempService memberTempService;
 
-    public TempMember save(String nickname) {
-        TempMember temp = tempMemberRepository.findByNickname("nickname").orElseThrow();
+    @Transactional
+    public TempMember temp() {
+        TempMember temp = TempMember.of("test");
+        tempMemberRepository.save(temp);
         return temp;
     }
 

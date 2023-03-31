@@ -21,8 +21,13 @@ public class MemberController {
     private final MemberService memberService;
 
     @PostMapping("/save")
-    public void save(@RequestParam(required = false) String param1, @RequestParam(required = false) String param2) {
-        memberService.save("testNickname");
+    public TempMember save(@RequestParam(required = false) String param1, @RequestParam(required = false) String param2) {
+        return memberService.save("testNickname");
+    }
+
+    @PostMapping("/find")
+    public TempMember find(@RequestParam(required = false) String param1, @RequestParam(required = false) String param2) {
+        return memberService.find("testNickname");
     }
 
     @PostMapping("/save-and-flush")
