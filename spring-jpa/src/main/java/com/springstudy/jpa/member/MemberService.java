@@ -51,19 +51,6 @@ public class MemberService {
         return member;
     }
 
-    @Transactional(readOnly = true)
-    public List<Member> findByOrganization(Long organizationId) {
-        Organization organization =
-            organizationRepository.findById(organizationId).orElseThrow(RuntimeException::new);
-        List<Member> members = memberRepository.findByOrganization(organization);
-        return members;
-    }
-
-    @Transactional(readOnly = true)
-    public List<Member> findByOrganizationId(Long organizationId) {
-        List<Member> members = memberRepository.findByOrganizationId(organizationId);
-        return members;
-    }
 
     @Transactional
     public Member updateMemberNickname(Long memberId) {

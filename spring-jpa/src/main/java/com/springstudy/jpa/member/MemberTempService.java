@@ -4,24 +4,47 @@ import com.springstudy.jpa.organization.Organization;
 import com.springstudy.jpa.organization.OrganizationRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
 public class MemberTempService {
-    private final MemberRepository memberRepository;
     private final TempMemberRepository tempMemberRepository;
-    private final OrganizationRepository organizationRepository;
 
     @Transactional
-    public TempMember temp() {
-        TempMember temp = TempMember.of("test");
-        tempMemberRepository.save(temp);
-        return temp;
+    public void temp() {
+        List<String> ids = new ArrayList<>();
+        IntStream.range(0, 100)
+                .forEach(i -> ids.add(RandomStringUtils.randomAlphanumeric(10)));
+
+        for (int i = 0; i < 5; i++) {
+            List<TempMember> tempMembers = new ArrayList<>();
+            ids.forEach(id -> tempMembers.add(TempMember.of(id)));
+            tempMemberRepository.saveAll(tempMembers);
+            System.out.println("처리완료");
+            try {
+                Thread.sleep(5000);
+            } catch (Exception e) {
+
+            }
+        }
+//        List<TempMember> tempMembers = new ArrayList<>();
+//        ids.forEach(id -> tempMembers.add(TempMember.of(id)));
+//        tempMemberRepository.saveAll(tempMembers);
+//        System.out.println("처리완료");
+//        try {
+//            Thread.sleep(10000);
+//        } catch (Exception e) {
+//
+//        }
+        System.out.println("진짜완료");
     }
 
     @Transactional
@@ -30,45 +53,45 @@ public class MemberTempService {
         return temp;
     }
 
-    @Transactional
-    public Member saveAndFlush(String nickname) {
-        Member member = Member.of(nickname);
-        return memberRepository.saveAndFlush(member);
-    }
+//    @Transactional
+//    public Member saveAndFlush(String nickname) {
+//        Member member = Member.of(nickname);
+//        return memberRepository.saveAndFlush(member);
+//    }
 
-    @Transactional
-    public Member saveAndUpdate(String nickname) {
-        Member member = Member.of(nickname);
-        memberRepository.save(member);
-        return member;
-    }
+//    @Transactional
+//    public Member saveAndUpdate(String nickname) {
+//        Member member = Member.of(nickname);
+//        memberRepository.save(member);
+//        return member;
+//    }
+//
+//    @Transactional
+//    public Member saveAndFlushAndUpdate(String nickname) {
+//        Member member = Member.of(nickname);
+//        member = memberRepository.saveAndFlush(member);
+//        return member;
+//    }
 
-    @Transactional
-    public Member saveAndFlushAndUpdate(String nickname) {
-        Member member = Member.of(nickname);
-        member = memberRepository.saveAndFlush(member);
-        return member;
-    }
+//    @Transactional(readOnly = true)
+//    public List<Member> findByOrganization(Long organizationId) {
+//        Organization organization =
+//            organizationRepository.findById(organizationId).orElseThrow(RuntimeException::new);
+//        List<Member> members = memberRepository.findByOrganization(organization);
+//        return members;
+//    }
+//
+//    @Transactional(readOnly = true)
+//    public List<Member> findByOrganizationId(Long organizationId) {
+//        List<Member> members = memberRepository.findByOrganizationId(organizationId);
+//        return members;
+//    }
 
-    @Transactional(readOnly = true)
-    public List<Member> findByOrganization(Long organizationId) {
-        Organization organization =
-            organizationRepository.findById(organizationId).orElseThrow(RuntimeException::new);
-        List<Member> members = memberRepository.findByOrganization(organization);
-        return members;
-    }
-
-    @Transactional(readOnly = true)
-    public List<Member> findByOrganizationId(Long organizationId) {
-        List<Member> members = memberRepository.findByOrganizationId(organizationId);
-        return members;
-    }
-
-    @Transactional
-    public Member updateMemberNickname(Long memberId) {
-        Member member = memberRepository.findById(memberId).orElseThrow(RuntimeException::new);
-        String newNickname = "newNickname";
-        member.nickname(newNickname);
-        return member;
-    }
+//    @Transactional
+//    public Member updateMemberNickname(Long memberId) {
+//        Member member = memberRepository.findById(memberId).orElseThrow(RuntimeException::new);
+//        String newNickname = "newNickname";
+//        member.nickname(newNickname);
+//        return member;
+//    }
 }
