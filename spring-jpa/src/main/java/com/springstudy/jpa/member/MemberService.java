@@ -1,6 +1,7 @@
 package com.springstudy.jpa.member;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,9 +21,21 @@ public class MemberService {
     private final OrganizationRepository organizationRepository;
     private final MemberTempService memberTempService;
 
+    @Transactional
     public TempMember save(String nickname) {
-        TempMember temp = tempMemberRepository.findByNickname("nickname").orElseThrow();
-        return temp;
+        tempMemberRepository.deleteAll();
+        try {
+            TimeUnit.SECONDS.sleep(52);
+        } catch (Exception e) {
+        }
+        System.out.println("통과");
+        return new TempMember();
+    }
+
+    @Transactional
+    public TempMember save2(String nickname) {
+        tempMemberRepository.deleteAllById(List.of(1L));
+        return new TempMember();
     }
 
     @Transactional

@@ -25,6 +25,11 @@ public class MemberController {
         return memberService.save("testNickname");
     }
 
+    @PostMapping("/save2")
+    public TempMember save2(@RequestParam(required = false) String param1, @RequestParam(required = false) String param2) {
+        return memberService.save2("testNickname");
+    }
+
     @PostMapping("/find")
     public TempMember find(@RequestParam(required = false) String param1, @RequestParam(required = false) String param2) {
         return memberService.find("testNickname");

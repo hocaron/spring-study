@@ -1,5 +1,6 @@
 package com.springstudy.jpa.member;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,6 +17,7 @@ import javax.persistence.Id;
 @NoArgsConstructor
 @Setter
 @DynamicUpdate
+@AllArgsConstructor
 public class TempMember {
 
     @Id

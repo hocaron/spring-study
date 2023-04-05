@@ -40,7 +40,9 @@ class MemberTempServiceTest {
     @Test
     @Rollback(value = false)
     void test2() throws InterruptedException {
-        memberTempService.temp();
+        TempMember tempMember = new TempMember(3L, "test");
+        tempMemberRepository.save(tempMember);
+
     }
 
 //    @Test
