@@ -1,11 +1,14 @@
 package com.springstudy.jpa.member;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+import org.aspectj.weaver.ast.Or;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,7 +17,6 @@ import com.springstudy.jpa.organization.OrganizationRepository;
 
 @Service
 @RequiredArgsConstructor
-@Slf4j
 public class MemberService {
     private final MemberRepository memberRepository;
     private final TempMemberRepository tempMemberRepository;
@@ -22,14 +24,38 @@ public class MemberService {
     private final MemberTempService memberTempService;
 
     @Transactional
-    public TempMember save(String nickname) {
-        tempMemberRepository.deleteAll();
-        try {
-            TimeUnit.SECONDS.sleep(52);
-        } catch (Exception e) {
+    public void test_NONE_PK로_조회() {
+
+        for (int i = 0; i < 20; i++) {
+                Member m = memberRepository.findByNickname(i + " new nickname").get();
+                m.update(i + " nickname");
         }
-        System.out.println("통과");
-        return new TempMember();
+    }
+
+    @Transactional
+    @Async
+    public void test_PK로_조회() {
+        //given
+        List<Member> members = new ArrayList<>();
+
+        for (int i = 0; i < 20; i++) {
+            Member m = memberRepository.findById((long) (i + 1)).get();
+            m.update(i + " new nickname");
+            members.add(m);
+        }
+        memberRepository.saveAll(members);
+    }
+
+    public void test1() {
+        //given
+        List<Member> members = new ArrayList<>();
+
+        for (int i = 0; i < 1000; i++) {
+            members.add(Member.of(i + " nickname"));
+            System.out.println(i);
+        }
+
+        memberRepository.saveAll(members);
     }
 
     @Transactional

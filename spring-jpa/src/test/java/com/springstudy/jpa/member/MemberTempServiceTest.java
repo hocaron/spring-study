@@ -29,13 +29,13 @@ class MemberTempServiceTest {
 
     private static List<String> ids;
 
-    @BeforeEach
-    void setUp() {
-//        ids = new ArrayList<>();
-//        IntStream.range(0, 100)
-//                .forEach(i -> ids.add(RandomStringUtils.randomAlphanumeric(10)));
-        memberTempService = new MemberTempService(tempMemberRepository);
-    }
+//    @BeforeEach
+//    void setUp() {
+////        ids = new ArrayList<>();
+////        IntStream.range(0, 100)
+////                .forEach(i -> ids.add(RandomStringUtils.randomAlphanumeric(10)));
+//        memberTempService = new MemberTempService(tempMemberRepository);
+//    }
 
     @Test
     @Rollback(value = false)

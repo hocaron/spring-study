@@ -21,8 +21,8 @@ public class MemberController {
     private final MemberService memberService;
 
     @PostMapping("/save")
-    public TempMember save(@RequestParam(required = false) String param1, @RequestParam(required = false) String param2) {
-        return memberService.save("testNickname");
+    public void save(@RequestParam(required = false) String param1, @RequestParam(required = false) String param2) {
+        memberService.test_PK로_조회();
     }
 
     @PostMapping("/save2")

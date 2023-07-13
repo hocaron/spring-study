@@ -18,6 +18,8 @@ import java.util.stream.IntStream;
 public class MemberTempService {
     private final TempMemberRepository tempMemberRepository;
 
+    private final MemberRepository memberRepository;
+
     @Transactional
     public void temp() {
         List<String> ids = new ArrayList<>();
@@ -94,4 +96,22 @@ public class MemberTempService {
 //        member.nickname(newNickname);
 //        return member;
 //    }
+
+    @Transactional
+    public void test(List<Member> members) {
+        int chunkSize = 300;
+        int totalSize = members.size();
+        int fromIndex = 0;
+        int toIndex = Math.min(chunkSize, totalSize);
+
+        // Chunk 단위로 저장
+        while (fromIndex < totalSize) {
+            List<Member> chunkMembers = members.subList(fromIndex, toIndex);
+            memberRepository.saveAll(chunkMembers);
+            System.out.println(fromIndex + " saveAll 완료");
+
+            fromIndex = toIndex;
+            toIndex = Math.min(fromIndex + chunkSize, totalSize);
+        }
+    }
 }

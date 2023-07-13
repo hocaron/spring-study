@@ -21,7 +21,6 @@ import javax.persistence.Id;
 public class TempMember {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     private String nickname;

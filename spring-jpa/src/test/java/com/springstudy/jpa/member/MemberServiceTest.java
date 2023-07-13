@@ -2,36 +2,34 @@ package com.springstudy.jpa.member;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import antlr.collections.impl.IntRange;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-@Transactional
+import java.util.ArrayList;
+import java.util.List;
+
 @SpringBootTest
 class MemberServiceTest {
 
     @Autowired
-    MemberRepository memberRepository;
+    Member1Repository memberRepository;
 
     @Autowired
     MemberService memberService;
 
     @Test
-    public void accessor_어노테이션_업데이트_테스트() {
-        //given
-        Member member = new Member();
-        member.id(1L);
-        member.nickname("nickname");
-        memberRepository.save(member);
+    public void pk로_조회하면_update_일괄수행() {
+        memberService.test_PK로_조회();
+    }
 
-        //when
-        memberService.updateMemberNickname(1L);
-
-        //then
-        Member udpatedMember = memberRepository.getReferenceById(1L);
-        assertEquals("newNickname", udpatedMember.nickname());
+    @Test
+    public void pk아닌값으로_조회하면_update_바로수행() {
+        memberService.test_NONE_PK로_조회();
     }
 }

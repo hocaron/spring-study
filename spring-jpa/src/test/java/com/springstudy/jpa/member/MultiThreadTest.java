@@ -21,7 +21,6 @@ public class MultiThreadTest {
         for (int i = 0; i < numberOfThreads; i++) {
             service.submit(() -> {
                 try {
-                    memberService.save("");
                 } catch (Exception e) {
                     // Handle exception
                 }
