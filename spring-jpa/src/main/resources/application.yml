@@ -1,8 +1,10 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/jpa?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/jpa?serverTimezone=Asia/Seoul&characterEncoding=UTF-8&profileSQL=true&logger=Slf4JLogger&maxQuerySizeToLog=999999&rewriteBatchedStatements=true
     username: root
-    password:
+    password: root
+
   jpa:
     hibernate:
       ddl-auto: none
@@ -10,4 +12,5 @@ spring:
       hibernate:
         show_sql: true
         format_sql: true
-        default_batch_fetch_size: 100
+        jdbc:
+          batch_size: 1000
