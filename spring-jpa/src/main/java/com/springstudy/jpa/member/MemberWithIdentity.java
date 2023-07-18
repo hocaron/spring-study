@@ -5,9 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Getter
@@ -15,16 +13,16 @@ import javax.persistence.Table;
 @Accessors(fluent = true)
 @Setter
 @Table(name = "member")
-public class Member {
+public class MemberWithIdentity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String nickname;
 
-    public static Member of(Long id, String nickname) {
-        Member member = new Member();
-        member.id = id;
+    public static MemberWithIdentity of(String nickname) {
+        MemberWithIdentity member = new MemberWithIdentity();
         member.nickname = nickname;
         return member;
     }

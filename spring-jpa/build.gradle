@@ -19,10 +19,19 @@ dependencies {
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	implementation 'mysql:mysql-connector-java'
 	compileOnly 'org.projectlombok:lombok'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation 'org.apache.commons:commons-lang3:3.12.0'
 
 	annotationProcessor 'org.projectlombok:lombok'
+
+	testImplementation 'com.h2database:h2'
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude module: 'junit'
+	}
+	testImplementation('org.junit.jupiter:junit-jupiter-api:5.9.2')
+	testRuntimeOnly('org.junit.jupiter:junit-jupiter-engine:5.9.2')
+	testRuntimeOnly('org.junit.platform:junit-platform-engine:1.9.2')
+	testRuntimeOnly('org.junit.platform:junit-platform-commons:1.9.2')
+
 }
 
 tasks.named('test') {
