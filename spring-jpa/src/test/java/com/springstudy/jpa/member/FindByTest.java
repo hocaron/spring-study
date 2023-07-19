@@ -11,51 +11,51 @@ import org.springframework.boot.test.context.SpringBootTest;
 class FindByTest {
 
     @Autowired
-    MemberService memberService;
+    FindByService findByService;
 
     @BeforeEach
     void setUp() {
-        memberService.saveAll();
+        findByService.saveAll();
     }
 
     @Test
     @DisplayName("Pk로 조회 하면 더티체킹 일괄수행")
     void findByPkAndUpdateTest() {
-        memberService.findByPkAndUpdate();
+        findByService.findByPkAndUpdate();
     }
 
     @Test
     @DisplayName("Pk 아닌 값으로 조회 하면 더티체킹 바로 수행")
     void findByNonePkAndUpdateTest() {
-        memberService.findByNonePkAndUpdate();
+        findByService.findByNonePkAndUpdate();
     }
 
     @Test
     @DisplayName("Pk로 In 절 조회 하면 더티체킹 일괄수행")
     void findAllByPkInAndUpdateTest() {
-        memberService.findAllByPkInAndUpdate();
+        findByService.findAllByPkInAndUpdate();
     }
 
     @Test
     @DisplayName("Pk 아닌 값으로 In 절 조회 하면 더티체킹 바로 수행")
     void findAllByNonePkInAndUpdateTest() {
-        memberService.findAllByNonePkInAndUpdate();
+        findByService.findAllByNonePkInAndUpdate();
     }
 
     @Test
     @DisplayName("Pk 아닌 값으로 조회 하면 쿼리는 한번 생성")
     void findByPkTest() {
-        memberService.findByPk();
+        findByService.findByPk();
     }
 
     @Test
     @DisplayName("Pk 아닌 값으로 조회 하면 쿼리는 수행한 만큼 생성")
     void findByNonePkTest() {
-        memberService.findByNonePk();
+        findByService.findByNonePk();
     }
 
     @AfterEach
     void clean() {
-        memberService.deleteAll();
+        findByService.deleteAll();
     }
 }

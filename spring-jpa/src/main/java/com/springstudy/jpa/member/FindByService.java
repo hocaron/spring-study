@@ -12,7 +12,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class MemberService {
+public class FindByService {
 
     private final MemberRepository memberRepository;
 
