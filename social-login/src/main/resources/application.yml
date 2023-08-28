@@ -1,0 +1,12 @@
+client:
+  kakao-auth:
+    url: https://kauth.kakao.com
+  kakao:
+    url: https://kapi.kakao.com
+
+social-login:
+  provider:
+    kakao:
+      grant-type: authorization_code
+      client-id: YOUR_APP_CLIENT_ID
+      client-secret: YOUR_APP_CLIENT_SECRET
