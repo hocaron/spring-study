@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 
 @Component
 @FeignClient(
-    name = "kakao-feign-client",
+    name = "kakao-api",
     url = "${client.kakao.url}",
     configuration = KakaoFeignClientConfiguration.class
 )

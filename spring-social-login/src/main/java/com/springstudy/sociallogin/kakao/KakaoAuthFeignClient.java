@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Component
 @FeignClient(
-    name = "kakao-auth-feign-client",
+    name = "kakao-auth-api",
     url = "${client.kakao-auth.url}",
     configuration = KakaoFeignClientConfiguration.class
 )
