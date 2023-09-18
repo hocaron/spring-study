@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @ActiveProfiles("test")
 @SpringBootTest
-public class ReleationTest {
+public class RelationTest {
 
     @Autowired
     AnimalRepository animalRepository;
@@ -29,7 +29,6 @@ public class ReleationTest {
 
     @Test
     void getOwnerTest() {
-
         var animal = animalRepository.findById(animalId).get();
 
         assertThat(animal.owner().personId()).isEqualTo(personId);
