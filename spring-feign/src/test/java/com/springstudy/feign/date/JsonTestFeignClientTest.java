@@ -28,10 +28,10 @@ public class JsonTestFeignClientTest {
                 jsonTestFeignClient.getDate();
             });
         }
-        sw.stop();
-        System.out.println(sw.prettyPrint());
 
         // 모든 스레드의 실행을 기다림
         while (!executorService.isTerminated()) {}
+        sw.stop();
+        System.out.println(sw.prettyPrint());
     }
 }

@@ -25,15 +25,15 @@ public class JsonTestFeignClientBuilderTest {
     }
 
     @Test
-    void singleThreadTestWithDefault() {
-
-        executeWithSingleThread(createDefaultClient(), new StopWatch());
-    }
-
-    @Test
     void multiThreadTestWithApache() {
 
         executeWithMultiThread(createApacheHttpClient(), Executors.newFixedThreadPool(THREAD_POOL), new StopWatch());
+    }
+
+    @Test
+    void singleThreadTestWithDefault() {
+
+        executeWithSingleThread(createDefaultClient(), new StopWatch());
     }
 
     @Test
@@ -51,7 +51,8 @@ public class JsonTestFeignClientBuilderTest {
 
         // 모든 스레드의 실행을 기다림
         executorService.shutdown();
-        while (!executorService.isTerminated()) {}
+        while (!executorService.isTerminated()) {
+        }
         sw.stop();
         System.out.println(sw.getTotalTimeMillis());
     }
@@ -73,8 +74,8 @@ public class JsonTestFeignClientBuilderTest {
 
     private JsonTestFeignClientBuilder createApacheHttpClient() {
         PoolingHttpClientConnectionManager cm = new PoolingHttpClientConnectionManager();
-        cm.setMaxTotal(100);            // 전체 커넥션 수 제한
-        cm.setDefaultMaxPerRoute(100);  // 각 라우트(호스트)당 최대 커넥션 수 제한
+        cm.setMaxTotal(200);            // 전체 커넥션 수 제한
+        cm.setDefaultMaxPerRoute(200);  // 각 라우트(호스트)당 최대 커넥션 수 제한
 
         // CloseableHttpClient를 생성할 때 PoolingHttpClientConnectionManager 사용
         CloseableHttpClient httpClient = HttpClients.custom()
