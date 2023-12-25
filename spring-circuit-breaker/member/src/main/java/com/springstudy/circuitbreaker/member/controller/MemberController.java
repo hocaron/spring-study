@@ -1,26 +1,20 @@
 package com.springstudy.circuitbreaker.member.controller;
 
 import com.springstudy.circuitbreaker.member.client.PointFeignClient;
+import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/members")
+@RequestMapping("/members/points")
 @RequiredArgsConstructor
 public class MemberController {
 
     private final PointFeignClient pointFeignClient;
 
-    @GetMapping("/{type}")
-    public String ping(@PathVariable String type) {
+    @GetMapping
+    public String ping(@RequestParam String type) {
 
-        if ("PASS".equals(type)) {
-            return "pong";
-        }
-
-        throw new RuntimeException();
+        return pointFeignClient.getPoints(type);
     }
 }
