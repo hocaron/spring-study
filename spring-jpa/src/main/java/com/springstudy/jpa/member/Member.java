@@ -8,6 +8,7 @@ import lombok.experimental.Accessors;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 @Entity
 @Getter
@@ -21,6 +22,9 @@ public class Member {
     private Long id;
 
     private String nickname;
+
+    @Version
+    private Long version;
 
     public static Member of(Long id, String nickname) {
         Member member = new Member();

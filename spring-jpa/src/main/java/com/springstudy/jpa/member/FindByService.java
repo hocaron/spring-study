@@ -16,11 +16,13 @@ public class FindByService {
 
     private final MemberRepository memberRepository;
 
-    private static final String DEFAULT_NICKNAME = " nickname";
+    private static final String DEFAULT_NICKNAME = "";
 
     private static final String NEW_NICKNAME = " new nickname";
 
     private static final Integer LOOP_COUNT = 21;
+
+    private final InnerMethodService innerMethodService;
 
     @Transactional
     public void findByNonePkAndUpdate() {
@@ -59,15 +61,12 @@ public class FindByService {
     @Transactional
     public void findAllByNonePkInAndUpdate() {
 
-        List<String> nicknames = new ArrayList<>();
-        for (long i = 1; i < LOOP_COUNT; i++) {
-            nicknames.add(i + DEFAULT_NICKNAME);
-        }
-
-        List<Member> members = memberRepository.findAllByNicknameIn(nicknames);
-        for (int i = 1; i < LOOP_COUNT; i++) {
-            members.get(i - 1).update(i + NEW_NICKNAME);
-            members.get(i - 1).update(i + NEW_NICKNAME);
+        var members = memberRepository.findById(1L).orElseThrow();
+        members.update("test");
+        innerMethodService.test();
+        try {
+            Thread.sleep(10_000);
+        } catch (Exception e) {
         }
     }
 
