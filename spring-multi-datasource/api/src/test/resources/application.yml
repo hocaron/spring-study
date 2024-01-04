@@ -1,0 +1,25 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate.format_sql: true
+      hibernate.hbm2ddl.auto: create
+      hibernate.show_sql: true
+      hibernate.generate_ddl: false
+      hibernate.open_in_view: false
+  account-datasource:
+    jdbc-url: jdbc:h2:mem:test1
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+    hikari:
+      maximum-pool-size: 10
+      leak-detection-threshold: 5000
+  user-datasource:
+    jdbc-url: jdbc:h2:mem:test1
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+    hikari:
+      maximum-pool-size: 10
