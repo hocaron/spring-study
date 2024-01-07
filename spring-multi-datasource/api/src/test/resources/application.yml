@@ -16,7 +16,7 @@ spring:
     hikari:
       maximum-pool-size: 10
       leak-detection-threshold: 5000
-  user-datasource:
+  member-datasource:
     jdbc-url: jdbc:h2:mem:test1
     username: sa
     password:

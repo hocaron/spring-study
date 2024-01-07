@@ -1,34 +1,52 @@
 package com.spring.boilerplate.service;
 
-import com.spring.boilerplate.entity.account.Account;
-import com.spring.boilerplate.entity.user.User;
-import com.spring.boilerplate.querydsl.account.CustomAccountRepository;
+import com.spring.boilerplate.entity.member.Member;
 import com.spring.boilerplate.repository.account.AccountRepository;
 import com.spring.boilerplate.util.EntityManagerUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.Random;
-
 @Service
 @RequiredArgsConstructor
 public class AccountService {
 
 	private final AccountRepository accountRepository;
-	private final CustomAccountRepository customAccountRepository;
+	public static final String INNER_UPDATED_EMAIL = "innerUpdated@email.com";
+	public static final String UPDATED_ACCOUNT = "updatedAccount";
 
 	@Transactional
-	public void create(User user) {
-		accountRepository.save(Account.of(String.valueOf(createRandomAccount()), user));
+	public void update(Member member) {
+		member.updateEmail(INNER_UPDATED_EMAIL);
+		var account = accountRepository.findByMemberId(member.getId())
+				.orElseThrow();
+		account.updateAccount(UPDATED_ACCOUNT);
+	}
+
+	@Transactional("accountTransactionManager")
+	public void updateWithAccountEntityManager(Member member) {
+		member.updateEmail(INNER_UPDATED_EMAIL);
+		var account = accountRepository.findByMemberId(member.getId())
+				.orElseThrow();
+		account.updateAccount(UPDATED_ACCOUNT);
 	}
 
 	@Transactional
-	public void update(long userId) {
-		var account = accountRepository.findByUserId(userId)
+	public void updateAndThrow(Member member) {
+		member.updateEmail(INNER_UPDATED_EMAIL);
+		var account = accountRepository.findByMemberId(member.getId())
 				.orElseThrow();
-		account.updateAccount("changeAccount");
+		account.updateAccount(UPDATED_ACCOUNT);
+		throw new RuntimeException();
+	}
+
+	@Transactional("accountTransactionManager")
+	public void updateWithAccountEntityManagerAndThrow(Member member) {
+		member.updateEmail(INNER_UPDATED_EMAIL);
+		var account = accountRepository.findByMemberId(member.getId())
+				.orElseThrow();
+		account.updateAccount(UPDATED_ACCOUNT);
+		throw new RuntimeException();
 	}
 
 	@Transactional
@@ -41,21 +59,5 @@ public class AccountService {
 	public Object getTrxName() {
 
 		return EntityManagerUtils.getEntityManagerName();
-	}
-
-	@Transactional
-	public List<Account> getAll() {
-		var temp =  accountRepository.findAll();
-
-		return temp;
-	}
-
-	public String getById(Long id) {
-		return customAccountRepository.retrieveById(id);
-	}
-
-	private long createRandomAccount() {
-		Random random = new Random();
-		return Math.abs(random.nextLong()) % 10000000000L;
 	}
 }

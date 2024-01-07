@@ -6,6 +6,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -19,30 +20,31 @@ import java.util.HashMap;
 
 @Configuration
 @EnableJpaRepositories(
-	basePackages = "com.spring.boilerplate.repository.user",
-	entityManagerFactoryRef = "userEntityManagerFactory",
-	transactionManagerRef = "userTransactionManager"
+	basePackages = "com.spring.boilerplate.repository.member",
+	entityManagerFactoryRef = "memberEntityManagerFactory",
+	transactionManagerRef = "memberTransactionManager"
 )
 @RequiredArgsConstructor
-public class UserDataSourceConfig {
+public class MemberDataSourceConfig {
 
 	private final Environment env;
 
 	@Bean
-	@ConfigurationProperties("spring.user-datasource")
-	public DataSource userDataSource() {
+	@ConfigurationProperties("spring.member-datasource")
+	public DataSource memberDataSource() {
 		return DataSourceBuilder.create().build();
 	}
 
+	@Primary
 	@Bean
-	public LocalContainerEntityManagerFactoryBean userEntityManagerFactory() {
+	public LocalContainerEntityManagerFactoryBean memberEntityManagerFactory() {
 		LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
-		em.setDataSource(userDataSource());
+		em.setDataSource(memberDataSource());
 
 		// Entity package
-		em.setPackagesToScan("com.spring.boilerplate.entity.user");
+		em.setPackagesToScan("com.spring.boilerplate.entity.member");
 		// Query DSL
-		em.setPersistenceUnitName("userEntityManager");
+		em.setPersistenceUnitName("memberEntityManager");
 
 		HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
 		em.setJpaVendorAdapter(vendorAdapter);
@@ -59,16 +61,16 @@ public class UserDataSourceConfig {
 		return em;
 	}
 
+	@Primary
 	@Bean
-	public PlatformTransactionManager userTransactionManager() {
+	public PlatformTransactionManager memberTransactionManager() {
 		JpaTransactionManager transactionManager = new JpaTransactionManager();
-		transactionManager.setEntityManagerFactory(userEntityManagerFactory().getObject());
+		transactionManager.setEntityManagerFactory(memberEntityManagerFactory().getObject());
 		return transactionManager;
 	}
 
 	@Bean
-	public JdbcTemplate userJdbcTemplate() {
-		return new JdbcTemplate(userDataSource());
+	public JdbcTemplate memberJdbcTemplate() {
+		return new JdbcTemplate(memberDataSource());
 	}
-
 }

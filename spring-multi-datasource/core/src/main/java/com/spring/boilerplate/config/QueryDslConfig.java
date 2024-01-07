@@ -1,12 +1,11 @@
 package com.spring.boilerplate.config;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-
+import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.querydsl.jpa.impl.JPAQueryFactory;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 @Configuration
 public class QueryDslConfig {
@@ -14,7 +13,7 @@ public class QueryDslConfig {
 	@PersistenceContext(unitName = "accountEntityManager")
 	private EntityManager accountEntityManager;
 
-	@PersistenceContext(unitName = "userEntityManager")
+	@PersistenceContext(unitName = "memberEntityManager")
 	private EntityManager userEntityManager;
 
 	@Bean

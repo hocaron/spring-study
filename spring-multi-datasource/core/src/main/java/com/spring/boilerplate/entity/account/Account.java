@@ -1,16 +1,10 @@
 package com.spring.boilerplate.entity.account;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
-import com.spring.boilerplate.entity.user.User;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 
 @Entity
 @Getter
@@ -25,16 +19,16 @@ public class Account {
 	@Column(name = "account", unique = true)
 	private String account;
 
-	@Column(name = "user_id")
-	private Long userId;
+	@Column(name = "member_id")
+	private Long memberId;
 
-	public Account(String account, Long userId) {
+	public Account(String account, Long memberId) {
 		this.account = account;
-		this.userId = userId;
+		this.memberId = memberId;
 	}
 
-	public static Account of(String account, User user) {
-		return new Account(account, user.getId());
+	public static Account of(String account, Long memberId) {
+		return new Account(account, memberId);
 	}
 
 	public void updateAccount(String account) {

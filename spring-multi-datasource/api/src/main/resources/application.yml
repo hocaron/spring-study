@@ -18,8 +18,8 @@ spring:
     hikari:
       maximum-pool-size: 10
       leak-detection-threshold: 5000
-  user-datasource:
-    jdbc-url: jdbc:mysql://localhost:3306/user?characterEncoding=UTF-8&serverTimezone=Asia/Seoul&autoReconnect=true
+  member-datasource:
+    jdbc-url: jdbc:mysql://localhost:3306/member?characterEncoding=UTF-8&serverTimezone=Asia/Seoul&autoReconnect=true
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver

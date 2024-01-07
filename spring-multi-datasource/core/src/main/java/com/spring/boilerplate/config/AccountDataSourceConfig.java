@@ -6,7 +6,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -35,7 +34,6 @@ public class AccountDataSourceConfig {
 		return DataSourceBuilder.create().build();
 	}
 
-	@Primary
 	@Bean
 	public LocalContainerEntityManagerFactoryBean accountEntityManagerFactory() {
 		LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
@@ -61,7 +59,6 @@ public class AccountDataSourceConfig {
 		return em;
 	}
 
-	@Primary
 	@Bean
 	public PlatformTransactionManager accountTransactionManager() {
 		JpaTransactionManager transactionManager = new JpaTransactionManager();
