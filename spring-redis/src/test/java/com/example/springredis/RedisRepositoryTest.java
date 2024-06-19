@@ -10,20 +10,17 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class RedisRepositoryTest {
 
     @Autowired
-    private PersonRedisRepository repo;
+    private PersonRedisRepository personRedisRepository;
 
     @Test
     void test() {
-        Person person = new Person("ho", 20);
+        var person = new Person("ho", 20);
 
         // 저장
-        repo.save(person);
+        var personId = personRedisRepository.save(person).getId();
 
         // `keyspace:id` 값을 가져옴
-        repo.findById(person.getId());
-
-        // Person Entity 의 @RedisHash 에 정의되어 있는 keyspace (people) 에 속한 키의 갯수를 구함
-        repo.count();
-
+        personRedisRepository.findById(personId);
+        personRedisRepository.findAllByAge(20).forEach(System.out::println);
     }
 }

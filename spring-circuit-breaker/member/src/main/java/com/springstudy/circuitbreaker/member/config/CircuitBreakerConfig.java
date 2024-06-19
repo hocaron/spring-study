@@ -1,13 +1,14 @@
 package com.springstudy.circuitbreaker.member.config;
 
-import io.github.resilience4j.circuitbreaker.CircuitBreaker;
-import io.github.resilience4j.circuitbreaker.CircuitBreakerRegistry;
-import lombok.RequiredArgsConstructor;
+import java.util.Set;
+
 import org.springframework.cloud.openfeign.CircuitBreakerNameResolver;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.Set;
+import io.github.resilience4j.circuitbreaker.CircuitBreaker;
+import io.github.resilience4j.circuitbreaker.CircuitBreakerRegistry;
+import lombok.RequiredArgsConstructor;
 
 @Configuration
 @RequiredArgsConstructor
@@ -16,8 +17,8 @@ public class CircuitBreakerConfig {
     private final CircuitBreakerRegistry circuitBreakerRegistry;
 
     @Bean
-    public CircuitBreaker pointCircuitBreaker(CircuitBreakerRegistry registry) {
-        return registry.circuitBreaker("point-api_getPoints");
+    public CircuitBreaker pointCircuitBreaker() {
+        return circuitBreakerRegistry.circuitBreaker("point-api_getPoints");
     }
 
     @Bean
