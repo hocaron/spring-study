@@ -1,0 +1,9 @@
+server:
+  port: 8080
+
+grpc:
+  client:
+    greeterService:
+      address: static://localhost:9090
+      enable-keep-alive: true
+      negotiationType: plaintext # ssl/tls 사용하지 않도록 설정
