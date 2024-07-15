@@ -106,3 +106,16 @@ project(':grpc-server') {
     bootJar.enabled = true
     jar.enabled = false
 }
+
+
+project(':rest-api-server') {
+    apply plugin: 'org.springframework.boot'
+
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+        implementation 'org.springframework.boot:spring-boot-starter'
+    }
+
+    bootJar.enabled = true
+    jar.enabled = false
+}

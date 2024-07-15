@@ -3,3 +3,4 @@ rootProject.name = 'grpc'
 include('grpc-client')
 include('grpc-server')
 include('grpc-interface')
+include('rest-api-server')

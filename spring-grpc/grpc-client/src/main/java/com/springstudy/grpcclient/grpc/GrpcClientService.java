@@ -1,8 +1,9 @@
 package com.springstudy.grpcclient.grpc;
 
-import com.example.grpcdemo.GreeterGrpc;
-import com.example.grpcdemo.HelloReply;
-import com.example.grpcdemo.HelloRequest;
+import com.springstudy.grpcdemo.GreeterGrpc;
+import com.springstudy.grpcdemo.HelloReply;
+import com.springstudy.grpcdemo.HelloRequest;
+import com.springstudy.grpcdemo.MemberInfoRequest;
 import net.devh.boot.grpc.client.inject.GrpcClient;
 import org.springframework.stereotype.Service;
 
@@ -16,5 +17,11 @@ public class GrpcClientService {
         HelloRequest request = HelloRequest.newBuilder().setName(name).build();
         HelloReply response = greeterBlockingStub.sayHello(request);
         return response.getMessage();
+    }
+
+    public String getMemberInfo(final long memberId) {
+        var request = MemberInfoRequest.newBuilder().setId(memberId).build();
+        var response = greeterBlockingStub.getMemberInfo(request);
+        return response.getEmail();
     }
 }
