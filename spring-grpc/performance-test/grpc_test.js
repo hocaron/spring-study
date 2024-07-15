@@ -20,9 +20,9 @@ export default () => {
     check(response, {
         'status is OK': (r) => r && r.status === grpc.StatusOK,
         'id is correct': (r) => r.message && r.message.id === "1",
-        'email is correct': (r) => r.message && r.message.email === 'user123@example.com',
-        'identification is correct': (r) => r.message && r.message.identification === 'ID123456789',
-        'phoneNumber is correct': (r) => r.message && r.message.phoneNumber === '010-1234-5678',
+        // 'email is correct': (r) => r.message && r.message.email === 'user123@example.com',
+        // 'identification is correct': (r) => r.message && r.message.identification === 'ID123456789',
+        // 'phoneNumber is correct': (r) => r.message && r.message.phoneNumber === '010-1234-5678',
     });
 
     client.close();

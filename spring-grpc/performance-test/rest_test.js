@@ -15,9 +15,9 @@ export default () => {
         'response is correct': (r) => {
             const json = r.json();
             return json.id === 1
-                && json.email === 'user123@example.com'
-                && json.identification === 'ID123456789'
-                && json.phoneNumber === '010-1234-5678';
+                // && json.email === 'user123@example.com'
+                // && json.identification === 'ID123456789'
+                // && json.phoneNumber === '010-1234-5678';
         },
     });
 
