@@ -22,6 +22,15 @@ allprojects {
 subprojects {
     apply plugin: 'java'
     apply plugin: 'io.spring.dependency-management'
+
+    dependencies {
+        implementation 'org.projectlombok:lombok:1.18.22'
+        annotationProcessor 'org.projectlombok:lombok:1.18.22'
+    }
+}
+
+project(':grpc-interface') {
+    apply plugin: 'java'
     apply plugin: 'com.google.protobuf'
 
     dependencies {
@@ -29,50 +38,32 @@ subprojects {
         implementation "io.grpc:grpc-protobuf:$grpcVersion"
         implementation "io.grpc:grpc-stub:$grpcVersion"
         implementation "com.google.protobuf:protobuf-java:$protobufVersion"
-        implementation 'org.projectlombok:lombok:1.18.22'
-        annotationProcessor 'org.projectlombok:lombok:1.18.22'
+        compileOnly 'jakarta.annotation:jakarta.annotation-api:1.3.5'
     }
 
     protobuf {
         protoc {
             artifact = "com.google.protobuf:protoc:${protobufVersion}"
         }
-        generatedFilesBaseDir = "$projectDir/src/generated"
-        clean {
-            delete generatedFilesBaseDir
-        }
         plugins {
             grpc {
                 artifact = "io.grpc:protoc-gen-grpc-java:${grpcVersion}"
             }
         }
+        generatedFilesBaseDir = "$projectDir/src/generated"
+
         generateProtoTasks {
-            all()*.plugins {
-                grpc {}
-                php {}
-            }
-        }
-    }
-}
-
-project(':grpc-interface') {
-    dependencies {
-        compileOnly 'jakarta.annotation:jakarta.annotation-api:1.3.5'
-    }
-
-    compileJava {
-        dependsOn generateProto
-        sourceSets {
-            main {
-                java {
-                    srcDirs 'src/main', 'build/generated/source/proto/main/java', 'build/generated/source/proto/main/grpc'
+            all().each { task ->
+                task.plugins {
+                    grpc {}
+                    php {}
                 }
             }
         }
     }
 
-    tasks.withType(JavaCompile) {
-        dependsOn tasks.withType(com.google.protobuf.gradle.GenerateProtoTask)
+    tasks.clean {
+        delete "$projectDir/src/generated"
     }
 }
 
