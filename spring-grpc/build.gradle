@@ -37,21 +37,27 @@ subprojects {
         protoc {
             artifact = "com.google.protobuf:protoc:${protobufVersion}"
         }
+        generatedFilesBaseDir = "$projectDir/src/generated"
+        clean {
+            delete generatedFilesBaseDir
+        }
         plugins {
             grpc {
                 artifact = "io.grpc:protoc-gen-grpc-java:${grpcVersion}"
             }
         }
         generateProtoTasks {
-            all().each { task ->
-                task.builtins {
-                    java {}
-                }
-                task.plugins {
-                    grpc {}
-                }
+            all()*.plugins {
+                grpc {}
+                php {}
             }
         }
+    }
+}
+
+project(':grpc-interface') {
+    dependencies {
+        compileOnly 'jakarta.annotation:jakarta.annotation-api:1.3.5'
     }
 
     compileJava {
@@ -67,16 +73,6 @@ subprojects {
 
     tasks.withType(JavaCompile) {
         dependsOn tasks.withType(com.google.protobuf.gradle.GenerateProtoTask)
-    }
-
-    test {
-        useJUnitPlatform()
-    }
-}
-
-project(':grpc-interface') {
-    dependencies {
-        compileOnly 'jakarta.annotation:jakarta.annotation-api:1.3.5'
     }
 }
 
