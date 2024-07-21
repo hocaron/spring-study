@@ -1,11 +1,10 @@
 package com.springstudy.grpcserver.grpc;
 
 import io.grpc.*;
-import net.devh.boot.grpc.server.interceptor.GrpcGlobalServerInterceptor;
-import org.springframework.stereotype.Component;
 
-@Component
-@GrpcGlobalServerInterceptor
+// TODO: grpc 클라이언트로부터 헤더를 받아야한다면 추가
+//@Component
+//@GrpcGlobalServerInterceptor
 public class MetadataInterceptor implements ServerInterceptor {
     static final Context.Key<Metadata> METADATA_KEY = Context.key("metadata");
 

@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "";
+option java_outer_classname = "MemberInfoProto";
+
+service MemberService {
+  rpc GetMemberInfo (MemberInfoRequest) returns (MemberInfoResponse) {}
+}
+
+message MemberInfoRequest {
+  int64 id = 1;
+
+  string user_agent = 10;
+
+  map<string, string> headers = 20;
+}
+
+message MemberInfoResponse {
+  int64 id = 1;
+  string email = 2;
+  string identification = 3;
+  string phone_number = 4;
+}

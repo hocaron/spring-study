@@ -1,13 +1,11 @@
 package com.springstudy.grpcclient.grpc;
 
 import io.grpc.*;
-import lombok.RequiredArgsConstructor;
-import net.devh.boot.grpc.client.interceptor.GrpcGlobalClientInterceptor;
-import org.springframework.stereotype.Component;
 
-@Component
-@GrpcGlobalClientInterceptor
-@RequiredArgsConstructor
+// TODO: grpc 서버로 헤더를 보내야 한다면 추가
+//@Component
+//@GrpcGlobalClientInterceptor
+//@RequiredArgsConstructor
 public class MetadataClientInterceptor implements ClientInterceptor {
 
     @Override

@@ -1,9 +1,9 @@
 import http from 'k6/http';
-import { check, sleep } from 'k6';
+import {check, sleep} from 'k6';
 
 export let options = {
     vus: 10, // Number of virtual users
-    duration: '15s', // Duration of the test
+    duration: '60s', // Duration of the test
 };
 
 export default () => {
@@ -18,9 +18,10 @@ export default () => {
         'Header7': 'Value7',
         'Header8': 'Value8',
         'Header9': 'Value9',
-        'Header10': 'Value10'
+        'Header10': 'Value10',
+        'User-Agent': 'user-agent'
     };
-    const response = http.get(url, { headers: headers });
+    const response = http.get(url, {headers: headers});
 
     check(response, {
         'status is 200': (r) => r.status === 200
