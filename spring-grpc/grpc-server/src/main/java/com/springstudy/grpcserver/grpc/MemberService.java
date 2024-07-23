@@ -34,7 +34,6 @@ public class MemberService extends MemberServiceGrpc.MemberServiceImplBase {
     @Override
     public void getMemberInfo(MemberInfoRequest request, StreamObserver<MemberInfoResponse> responseObserver) {
 
-        var te = request;
         var memberInfo = memberDatabase.get(request.getId());
         var reply = MemberInfoResponse.newBuilder()
             .setId(memberInfo.getId())
