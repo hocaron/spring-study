@@ -1,0 +1,9 @@
+spring:
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
+openfeature:
+  provider: YourFeatureFlagProvider
+  api-key: your-api-key
