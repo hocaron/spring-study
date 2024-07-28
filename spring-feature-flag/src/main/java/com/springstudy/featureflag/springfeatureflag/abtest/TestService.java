@@ -11,6 +11,10 @@ public class TestService {
 
     private final OpenFeatureAPI openFeatureAPI;
 
+    public String executeRollbackFeatureFlagLogic() {
+        return "Feature Flag Disabled";
+    }
+
     public String executeFeatureFlagLogic() {
         var client = openFeatureAPI.getClient(FeatureFlagClientType.ROLLBACK.getClientName());
         boolean isFeatureEnabled = client.getBooleanValue(FeatureFlagClientType.ROLLBACK.getClientName(), false);

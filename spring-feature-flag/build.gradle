@@ -25,6 +25,7 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-aop'
 	implementation 'dev.openfeature:sdk:1.9.0'
 	implementation 'dev.openfeature.contrib.providers:flagd:0.8.3'
 	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
