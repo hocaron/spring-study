@@ -1,0 +1,10 @@
+apiVersion: 1
+datasources:
+  - name: InfluxDB
+    type: influxdb
+    access: proxy
+    url: http://influxdb:8086
+    isDefault: true
+    database: k6
+    jsonData:
+      httpMode: GET

@@ -1,0 +1,38 @@
+version: '3.7'
+
+services:
+  influxdb1:
+    image: influxdb:1.8
+    container_name: influxdb1
+    ports:
+      - "8086:8086"
+    environment:
+      INFLUXDB_DB: k6 # 초기 데이터베이스 이름
+    volumes:
+      - influxdb-data:/var/lib/influxdb
+    networks:
+      - monitoring
+
+  grafana1:
+    image: grafana/grafana
+    container_name: grafana1
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin # Grafana 기본 사용자 이름
+      - GF_SECURITY_ADMIN_PASSWORD=admin # Grafana 기본 비밀번호
+    depends_on:
+      - influxdb1
+    networks:
+      - monitoring
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ./grafana/provisioning:/etc/grafana/provisioning
+      - ./grafana/provisioning/dashboards:/var/lib/grafana/dashboards
+
+volumes:
+  influxdb-data:
+  grafana-data:
+
+networks:
+  monitoring:

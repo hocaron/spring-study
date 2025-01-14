@@ -1,0 +1,27 @@
+#server:
+#  tomcat:
+#    threads:
+#      min-spare: 150
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/test?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      maximum-pool-size: 20
+      initialization-fail-timeout: 3000
+
+  jpa:
+    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: none
+  sql:
+    init:
+      mode: never
+
+logging:
+  level:
+    com.zaxxer.hikari.pool.HikariPool: DEBUG  # HikariCP ?? ??
+    com.zaxxer.hikari.HikariConfig: DEBUG
