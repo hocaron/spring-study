@@ -1,0 +1,60 @@
+server:
+  tomcat:
+    threads:
+      min-spare: 100
+
+spring:
+  profiles:
+    active: local
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      maximum-pool-size: 80
+      initialization-fail-timeout: 3000
+      auto-commit: false
+  jpa:
+    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: none
+    open-in-view: false
+  sql:
+    init:
+      mode: never
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+  metrics:
+    tags:
+      application: warm-up-service
+    enable:
+      jvm: true
+      process: true
+      system: true
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: local
+  datasource:
+    url: jdbc:mysql://localhost:3306/test
+    username: root
+    password: root
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: docker
+  datasource:
+    url: jdbc:mysql://host.docker.internal:3306/test
+    username: root
+    password: root

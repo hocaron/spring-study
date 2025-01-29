@@ -1,0 +1,11 @@
+apiVersion: 1
+datasources:
+  - name: InfluxDB
+    type: influxdb
+    access: proxy
+    url: http://influxdb:8086  # 서비스 이름 수정
+    uid: K6       # uid 추가하여 대시보드의 ${DS_K6}와 매칭
+    isDefault: true
+    database: k6
+    jsonData:
+      httpMode: GET
