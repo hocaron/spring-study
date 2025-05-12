@@ -1,0 +1,7 @@
+spring:
+  ai:
+    openai:
+      api-key: ENC(MSd2rWIin0S7F/+O6W3E0hZAj1BsrRS0WFz4TlCbktK6+ESIZO5PkwYEKcAxIRv1bL36fxbEctYCE7EPWbXgiKAhrTsZBKsnDctA/6ZgIFXTF96r1kPsrthqAobmYCxbrSUyhFFPCTqpmzDwDelI2ujGTlNSaWxzKiZ7Xd/7/qp86B2Bv/dCMRWKU8ZBocU1F5vXhmd4eLcyXlqV0omkj684HgYukjvy2LmPiYJtcaGby2NhImd3GV218sjT051reWfnX8nC1++YB8dHVqCkNg==)
+      chat:
+        options:
+          model: gpt-4o-mini

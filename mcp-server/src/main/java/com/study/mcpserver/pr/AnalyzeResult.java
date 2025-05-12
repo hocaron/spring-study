@@ -1,3 +1,10 @@
 package com.study.mcpserver.pr;
 
-record AnalyzeResult(String type, String content) {}
+
+import java.util.List;
+
+public record AnalyzeResult(
+    String summary,
+    List<String> considerations
+) {
+}
